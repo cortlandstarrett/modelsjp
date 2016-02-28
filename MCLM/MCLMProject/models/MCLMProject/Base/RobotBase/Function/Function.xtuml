@@ -1,0 +1,80 @@
+-- BP 7.1.6 content: Package syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO EP_PKG
+	VALUES ("1ee7e871-b36d-49bc-b23b-4463561992bd",
+	"00000000-0000-0000-0000-000000000000",
+	"4f69de9b-98d4-4380-a9de-65fb179b571c",
+	'Function',
+	'',
+	0);
+INSERT INTO GD_MD
+	VALUES ("92b24830-679d-41a9-8127-dc3f6458ec04",
+	112,
+	"1ee7e871-b36d-49bc-b23b-4463561992bd",
+	108,
+	0,
+	0,
+	1,
+	1,
+	1,
+	12,
+	1,
+	0,
+	0,
+	0,
+	0,
+	0,
+	'4.1.12',
+	'MCLMProject::Base::RobotBase::Function');
+INSERT INTO DIM_DIA
+	VALUES ("92b24830-679d-41a9-8127-dc3f6458ec04",
+	'',
+	1.000000,
+	4000.000000,
+	3000.000000,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO S_SYNC
+	VALUES ("3c6f1a09-052c-44df-acf1-de3973a94b2b",
+	"00000000-0000-0000-0000-000000000000",
+	'setup',
+	'',
+	'generate HW1:hello to HW creator;
+
+
+
+
+
+
+
+',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'');
+INSERT INTO PE_PE
+	VALUES ("3c6f1a09-052c-44df-acf1-de3973a94b2b",
+	1,
+	"1ee7e871-b36d-49bc-b23b-4463561992bd",
+	"00000000-0000-0000-0000-000000000000",
+	1);
+INSERT INTO PE_PE
+	VALUES ("1ee7e871-b36d-49bc-b23b-4463561992bd",
+	1,
+	"00000000-0000-0000-0000-000000000000",
+	"aa622b86-b80a-431a-aabf-93c11344fb3a",
+	7);
+INSERT INTO C_C_PROXY
+	VALUES ("aa622b86-b80a-431a-aabf-93c11344fb3a",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000",
+	'RobotBase',
+	'',
+	0,
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	'',
+	'../RobotBase.xtuml');
+INSERT INTO S_SYS_PROXY
+	VALUES ("4f69de9b-98d4-4380-a9de-65fb179b571c",
+	'MCLMProject',
+	1,
+	'../../../MCLMProject.xtuml');
