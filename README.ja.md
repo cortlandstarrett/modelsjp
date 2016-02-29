@@ -5,5 +5,7 @@
 
 modelsjpでは、xtUML.jpのメンバが提供したサンプルモデルやプロジェクトを公開しています。
 
+Facebook のグループ　 https://www.facebook.com/groups/xtuml.jp/
+
 wikiページも参照してください。
 https://github.com/xtuml/modelsjp/wiki
