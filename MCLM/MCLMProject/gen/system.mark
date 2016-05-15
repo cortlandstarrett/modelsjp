@@ -273,11 +273,12 @@
 .// Device Configuration for MCLM
 .// 
 .//============================================================================
-.invoke TagMotorConfig("LEFT","PORT_B","L",FALSE)
-.invoke TagMotorConfig("RIGHT","PORT_C","L",FALSE)
-.invoke TagMotorConfig("TAIL","PORT_A","M",FALSE)
-.invoke TagMotorConfig("FRONT","PORT_D","L",FALSE)
-.invoke TagSensorConfig("COLOR","1")
+.invoke TagMotorConfig("LEFT","PORT_C","L",FALSE)
+.invoke TagMotorConfig("RIGHT","PORT_B","L",FALSE)
+.//.invoke TagMotorConfig("TAIL","PORT_A","M",FALSE)
+.//.invoke TagMotorConfig("FRONT","PORT_D","L",FALSE)
+.invoke TagSensorConfig("COLOR","2")
+.invoke TagSensorConfig("TOUCH","4")
 .//
 .//============================================================================
 .// Do not add anything at the end of this file!

@@ -62,5 +62,16 @@ EV3COL_get_ambient()
 {
 	return ev3_color_sensor_get_ambient(port);
 }
+
+void EV3COL_get_rgb_raw( i_t *r, i_t *g, i_t *b )
+{
+	rgb_raw_t raw;
+	
+	ev3_color_sensor_get_rgb_raw(port,&raw);
+	*r = raw.r;
+	*g = raw.g;
+	*b = raw.b;
+}
+	
 .end if
 

@@ -746,7 +746,7 @@ INSERT INTO S_BPARM
 INSERT INTO S_BPARM
 	VALUES ("9e1a0bbd-ad8f-43e3-af27-fe84c06c726d",
 	"6698f7d9-8a44-439a-93d2-7d2599404613",
-	'duraration',
+	'duration',
 	"ba5eda7a-def5-0000-0000-000000000002",
 	0,
 	'',
@@ -768,7 +768,7 @@ INSERT INTO S_BPARM
 	"964068d9-e851-4227-aa57-06a48011a9f7",
 	'frequency',
 	"b292d053-5041-4387-a16f-1745c15db824",
-	1,
+	0,
 	'',
 	"00000000-0000-0000-0000-000000000000",
 	'音の周波数。
@@ -784,7 +784,7 @@ INSERT INTO S_DT_PROXY
 INSERT INTO S_BPARM
 	VALUES ("1dbc4b26-31a3-4df2-8eb8-1045a16ffa43",
 	"964068d9-e851-4227-aa57-06a48011a9f7",
-	'duraration',
+	'duration',
 	"ba5eda7a-def5-0000-0000-000000000002",
 	0,
 	'',
@@ -1099,7 +1099,7 @@ INSERT INTO S_BRG
 	VALUES ("7f9a602b-df3b-4305-9433-a554a49c066a",
 	"46dc6c70-a723-460c-b34c-c4829033c05b",
 	'Initialize',
-	'',
+	'初期化関数。自動的に呼ばれるので、ユーザが呼ぶ必要はない。',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
@@ -1113,13 +1113,32 @@ INSERT INTO S_BRG
 	0,
 	"ba5eda7a-def5-0000-0000-000000000004",
 	'',
-	3,
+	1,
 	'');
 INSERT INTO S_BPARM
 	VALUES ("7804285a-c27e-4146-b34a-bf657a855296",
 	"d34515a8-bb5b-437e-8926-ba91bb841d38",
 	'integer',
 	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO S_BRG
+	VALUES ("5e7d6d2e-9ab3-4f6b-b96c-165cc81b08e8",
+	"46dc6c70-a723-460c-b34c-c4829033c05b",
+	'bluetooth_write',
+	'',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000000",
+	'',
+	1,
+	'');
+INSERT INTO S_BPARM
+	VALUES ("d2b3cf1a-ffa0-4e28-bf37-2f1b3f18780f",
+	"5e7d6d2e-9ab3-4f6b-b96c-165cc81b08e8",
+	'string',
+	"ba5eda7a-def5-0000-0000-000000000004",
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000",
@@ -1340,12 +1359,13 @@ INSERT INTO S_BPARM
 	0,
 	'',
 	"2167e64e-9710-473f-8528-9b0584dcba64",
-	' 左右のモーター出力差。-100%～100%。マイナスが左方向。-20が指定された場合、左モーターがpowerの80%、右モーターがpowerの100%というようになる。');
+	' 左右のモーター出力差。-100%～100%。マイナスが左方向。-20が指定された場合、左モーターがpowerの80%、右モーターがpowerの100%というようになる。
+ ただし、実際のモーターの配置にもよるので、確認する事');
 INSERT INTO S_BRG
 	VALUES ("e27fd6b4-079f-436f-ada4-d33fa098940e",
 	"8ff4a843-1b54-4239-b624-346334f5b80c",
 	'Initialize',
-	'',
+	'初期化関数。自動的に呼ばれるので、ユーザが呼ぶ必要はない。',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
@@ -1426,11 +1446,57 @@ INSERT INTO S_BRG
 	VALUES ("6bf28829-83fc-40ab-b378-f62f73ec2bb9",
 	"948e9e75-2191-402d-98d0-c9ec3f0fd54e",
 	'Initialize',
-	'',
+	'初期化関数。自動的に呼ばれるので、ユーザが呼ぶ必要はない。',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
+	'');
+INSERT INTO S_BRG
+	VALUES ("f65dafb2-ffe4-43aa-acba-58924b47e986",
+	"948e9e75-2191-402d-98d0-c9ec3f0fd54e",
+	'get_rgb_raw',
+	'RGBのRaw値を返す
+r_r/r_g/r_bはアウトプットであり、取得された数字が返ってくることに注意。
+
+r=0;
+g=0;
+b=0;
+
+EV3COL::get_rgb_raw(r_r:r,r_g:g,r_b:b);
+
+のように使う。',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000000",
+	'',
+	1,
+	'');
+INSERT INTO S_BPARM
+	VALUES ("9d85cbf3-9449-45a6-96c3-4e5211e30b05",
+	"f65dafb2-ffe4-43aa-acba-58924b47e986",
+	'r_r',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO S_BPARM
+	VALUES ("ddea03eb-6e95-4900-ac1b-3346c3b1d5f0",
+	"f65dafb2-ffe4-43aa-acba-58924b47e986",
+	'r_g',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	1,
+	'',
+	"9d85cbf3-9449-45a6-96c3-4e5211e30b05",
+	'');
+INSERT INTO S_BPARM
+	VALUES ("266efef4-b92e-4a5f-a5f2-ebed7ce7ce92",
+	"f65dafb2-ffe4-43aa-acba-58924b47e986",
+	'r_b',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	1,
+	'',
+	"ddea03eb-6e95-4900-ac1b-3346c3b1d5f0",
 	'');
 INSERT INTO PE_PE
 	VALUES ("948e9e75-2191-402d-98d0-c9ec3f0fd54e",
@@ -1490,7 +1556,7 @@ INSERT INTO S_BRG
 	VALUES ("5703b9e2-5a6c-45d4-9302-0b31a9a2b7f8",
 	"cae84f66-a2f3-4f5a-9d8a-c80ea0916d63",
 	'Initialize',
-	'',
+	'初期化関数。自動的に呼ばれるので、ユーザが呼ぶ必要はない。',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
@@ -1545,7 +1611,7 @@ INSERT INTO S_BRG
 	VALUES ("ddede095-93f6-424d-99a5-1977d1648e34",
 	"24bf12a6-e448-410e-8544-b641010a1168",
 	'Initialize',
-	'',
+	'初期化関数。自動的に呼ばれるので、ユーザが呼ぶ必要はない。',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
@@ -1586,7 +1652,7 @@ INSERT INTO S_BRG
 	VALUES ("24411601-da0e-4d9c-9323-170dbb5edca7",
 	"06b8c1ef-8199-40d3-9cdc-da1733d2b876",
 	'Initialize',
-	'',
+	'初期化関数。自動的に呼ばれるので、ユーザが呼ぶ必要はない。',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',

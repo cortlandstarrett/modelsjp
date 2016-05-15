@@ -18,8 +18,8 @@ SRCDIR=../..
 ifdef app
 default:app
 endif
-ifdef mod
-default:appmod
+ifdef img
+default:img
 endif
 
 
@@ -30,5 +30,5 @@ $(APPLDIR)/app.cfg:$(APPLDIR)/app.cfg.tmp
 		echo "ATT_MOD(\"$$f\");" >> $@; \
 	done
 
-appmod:$(APPLDIR)/app.cfg
+img:$(APPLDIR)/app.cfg
 app:$(APPLDIR)/app.cfg
