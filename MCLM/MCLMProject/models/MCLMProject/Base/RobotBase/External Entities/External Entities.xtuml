@@ -243,7 +243,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-00000000000e",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("ccb7d832-6fc1-456b-bb0c-357125a5415f",
 	"db57b5f1-2b2f-4f99-830e-d41e4328f5cd",
@@ -253,7 +254,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-00000000000e",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("503296c7-911c-4e04-8cd8-422beca76db8",
 	"ccb7d832-6fc1-456b-bb0c-357125a5415f",
@@ -317,7 +319,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("4500ffe2-1320-4d6b-b420-3b47954c123a",
 	"7b497d1c-7735-4548-8db9-112ad3f2bc27",
@@ -336,7 +339,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("d44e74d0-181a-4e2f-983f-d1a34a394b85",
 	"6a20816b-7b72-46c7-91cd-ef1a1e6c38b6",
@@ -355,7 +359,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("065f3c6d-df4b-477f-93db-bd1264e14fc2",
 	"971c99de-e16c-4593-ab4e-8f1b069c1b9b",
@@ -374,7 +379,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("62483b0c-5f0e-4265-8abe-0fa92f212354",
 	"dc3d6dd2-f8e2-4522-a48b-5e81bd72dccb",
@@ -393,7 +399,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("d5e8bfda-195a-4afd-a42b-d0cc18edf48f",
 	"654689b6-72b1-4ac6-9a89-227b6ccd0331",
@@ -412,7 +419,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("e5897349-2320-4b28-9982-f5fa62ec4e4c",
 	"06a5e76a-211b-4570-bf68-ed5e0d15dc44",
@@ -431,7 +439,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000010",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("0b6291e9-69ef-4691-b7bd-2684215dd8aa",
 	"db57b5f1-2b2f-4f99-830e-d41e4328f5cd",
@@ -443,7 +452,8 @@ handle of the timer.',
 	"ba5eda7a-def5-0000-0000-00000000000f",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("a90d4598-bb2b-433a-a92d-2c807f24abb6",
 	"0b6291e9-69ef-4691-b7bd-2684215dd8aa",
@@ -475,7 +485,8 @@ of the timer.',
 	"ba5eda7a-def5-0000-0000-00000000000f",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("5c6d03ed-00c0-496a-b468-9b37ce3f4d35",
 	"92c99969-ccba-4343-8b7d-75f3ff006b2e",
@@ -504,7 +515,8 @@ the timer has expired, a zero value is returned.',
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("261917ff-7e93-40d2-95aa-28a051be82cb",
 	"1dbe47fa-657a-4608-bd33-ef53d29854d6",
@@ -526,7 +538,8 @@ is returned.',
 	"ba5eda7a-def5-0000-0000-000000000001",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("689ca7a8-1788-40dc-9a2a-7c08879a775a",
 	"34a15756-9c44-4753-83fa-a5c1c7933c45",
@@ -556,7 +569,8 @@ value is returned. If the timer no longer exists, a FALSE value is returned.',
 	"ba5eda7a-def5-0000-0000-000000000001",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("5a887239-a4fa-4e68-93cf-77854f13f7b5",
 	"9a39e1f0-d395-42fd-9236-7f3ea2cb4fd6",
@@ -586,7 +600,8 @@ timer no longer exists, a FALSE value is returned.',
 	"ba5eda7a-def5-0000-0000-000000000001",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("ad21c3a4-2316-4bf5-9371-71513310dc14",
 	"80f897c2-642d-4d6f-9a7d-6fc8862f90fd",
@@ -625,7 +640,8 @@ integer
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'return 10;',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("ee68ae39-1a5d-411a-bb15-6dd8c7bf8775",
 	"46dc6c70-a723-460c-b34c-c4829033c05b",
@@ -640,7 +656,8 @@ integer
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("066310f3-c280-4634-8644-f0e9dd3786b9",
 	"46dc6c70-a723-460c-b34c-c4829033c05b",
@@ -663,7 +680,8 @@ EV3Button::BACK_BUTTON',
 	"ba5eda7a-def5-0000-0000-000000000001",
 	'return true;',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("3c3a2922-099d-4d71-bee4-3a9a6015480c",
 	"066310f3-c280-4634-8644-f0e9dd3786b9",
@@ -698,7 +716,8 @@ EV3LcdColor::ORANGE',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("1622e324-0b90-444e-b0a0-3b0052022cbe",
 	"ffdd93c7-9a68-44d2-bd2a-e7019cf17d25",
@@ -733,7 +752,8 @@ duraration: integer
 	';
 ',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("0e034749-d119-46e5-96c7-62fdec1a4cde",
 	"6698f7d9-8a44-439a-93d2-7d2599404613",
@@ -762,7 +782,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("d7fc2a3e-ad8f-460d-9778-8da4750c2465",
 	"964068d9-e851-4227-aa57-06a48011a9f7",
@@ -801,7 +822,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("e123283d-0434-4926-97bf-6e331c10019e",
 	"db6ca092-5947-4122-92b1-392ec105c807",
@@ -821,7 +843,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("692c608e-623c-4209-97e7-4c29e7b3fe3a",
 	"46dc6c70-a723-460c-b34c-c4829033c05b",
@@ -838,7 +861,8 @@ false:接続切れ
 	'return true;
 ',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("3031e435-0711-41ec-9d6a-f0a7cfa29dfb",
 	"46dc6c70-a723-460c-b34c-c4829033c05b",
@@ -856,7 +880,8 @@ EV3Result::ERROR
 	'return EV3Result::OK;
 ',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("23244baa-0599-4d18-8ea5-09bd6a47505b",
 	"3031e435-0711-41ec-9d6a-f0a7cfa29dfb",
@@ -891,7 +916,8 @@ Result::ERROR
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("b5c22e2d-23eb-41dd-9b57-a0fbf4eb1649",
 	"33d2b5c1-09e8-4b6d-baa5-2b915a60d074",
@@ -929,7 +955,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("487622c8-6f66-4998-b694-5885300bd94d",
 	"cc8e6717-b806-48d7-acad-f401238f6272",
@@ -976,7 +1003,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("52c8195e-7d2f-43bb-814b-5f7da89c0030",
 	"b6c10286-6f4c-4773-9884-39f035a9f158",
@@ -1015,7 +1043,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("c5c397b5-94dd-419a-af87-bf67d558b1f0",
 	"ca6a4280-28ab-4e1e-8d6b-a420b203b12c",
@@ -1078,7 +1107,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("a9559680-b993-47c4-bbb0-251def64b687",
 	"7f671862-8e12-4193-b0c8-89300a28ba70",
@@ -1104,7 +1134,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("d34515a8-bb5b-437e-8926-ba91bb841d38",
 	"46dc6c70-a723-460c-b34c-c4829033c05b",
@@ -1114,7 +1145,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000004",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("7804285a-c27e-4146-b34a-bf657a855296",
 	"d34515a8-bb5b-437e-8926-ba91bb841d38",
@@ -1133,7 +1165,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("d2b3cf1a-ffa0-4e28-bf37-2f1b3f18780f",
 	"5e7d6d2e-9ab3-4f6b-b96c-165cc81b08e8",
@@ -1172,7 +1205,8 @@ integer
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'return 50;',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("742c72ae-8aec-4615-b14d-e42acc30852e",
 	"05fc12f4-ba56-4675-a5d2-399c7202eee7",
@@ -1206,7 +1240,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("6c594d1f-5a47-4fdb-9d23-087426e40e64",
 	"1b94111f-578e-4c4c-82d1-eccbf0bad6a9",
@@ -1238,7 +1273,8 @@ EV3Result::Error
 	"6ee47c5a-2b94-4598-85d2-dd62356c252b",
 	'return EV3Result::OK;',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("d9768aea-42ff-4f72-9ec9-2bcc7b3a135d",
 	"2c231149-d23d-46cb-9e6a-688a128d5864",
@@ -1275,7 +1311,8 @@ integer:モーターのパワー
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'return 30;',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("04d3b3c9-4793-4aa6-9c9c-350bfe33011f",
 	"12675b7b-5148-4b49-972e-1a1c11253a5c",
@@ -1304,7 +1341,8 @@ EV3Result::Error
 	"6ee47c5a-2b94-4598-85d2-dd62356c252b",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("aceb6faf-b483-41dc-849a-43b487d6d351",
 	"7a46927e-1897-44aa-b3a6-6b7cb47fc34c",
@@ -1341,7 +1379,8 @@ EV3Result::Error
 	"6ee47c5a-2b94-4598-85d2-dd62356c252b",
 	'return EV3Result::OK;',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("2167e64e-9710-473f-8528-9b0584dcba64",
 	"67b4a8c6-cf2d-4867-8652-709b69629c3c",
@@ -1370,7 +1409,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO PE_PE
 	VALUES ("8ff4a843-1b54-4239-b624-346334f5b80c",
 	1,
@@ -1400,7 +1440,8 @@ TagSensorConfigのMarkingによりカラーセンサーのポートの設定を�
 	"41e0e3f5-6627-4bfc-b71c-f9640423da11",
 	'return EV3Color::BLUE;',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_DT_PROXY
 	VALUES ("41e0e3f5-6627-4bfc-b71c-f9640423da11",
 	"00000000-0000-0000-0000-000000000000",
@@ -1424,7 +1465,8 @@ TagSensorConfigのMarkingによりカラーセンサーのポートの設定を�
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'return 50;',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("4930a34e-e362-4f05-a66f-1abf910c0992",
 	"948e9e75-2191-402d-98d0-c9ec3f0fd54e",
@@ -1441,7 +1483,8 @@ TagSensorConfigのMarkingによりカラーセンサーのポートの設定を�
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'return 50;',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("6bf28829-83fc-40ab-b378-f62f73ec2bb9",
 	"948e9e75-2191-402d-98d0-c9ec3f0fd54e",
@@ -1451,7 +1494,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("f65dafb2-ffe4-43aa-acba-58924b47e986",
 	"948e9e75-2191-402d-98d0-c9ec3f0fd54e",
@@ -1470,7 +1514,8 @@ EV3COL::get_rgb_raw(r_r:r,r_g:g,r_b:b);
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("9d85cbf3-9449-45a6-96c3-4e5211e30b05",
 	"f65dafb2-ffe4-43aa-acba-58924b47e986",
@@ -1526,7 +1571,8 @@ integer
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'return 30;',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("dc09cf69-64ac-4f1c-842e-c1da23b96e78",
 	"cae84f66-a2f3-4f5a-9d8a-c80ea0916d63",
@@ -1540,7 +1586,8 @@ integer
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'return 30;',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("6291a7a5-1aad-4b57-9b78-127df82b1539",
 	"cae84f66-a2f3-4f5a-9d8a-c80ea0916d63",
@@ -1551,7 +1598,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("5703b9e2-5a6c-45d4-9302-0b31a9a2b7f8",
 	"cae84f66-a2f3-4f5a-9d8a-c80ea0916d63",
@@ -1561,7 +1609,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO PE_PE
 	VALUES ("cae84f66-a2f3-4f5a-9d8a-c80ea0916d63",
 	1,
@@ -1590,7 +1639,8 @@ integer
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'return 40;',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("828c5dd4-93f9-4360-9b78-8df875249c3c",
 	"24bf12a6-e448-410e-8544-b641010a1168",
@@ -1606,7 +1656,8 @@ boolean
 	"ba5eda7a-def5-0000-0000-000000000001",
 	'return true;',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("ddede095-93f6-424d-99a5-1977d1648e34",
 	"24bf12a6-e448-410e-8544-b641010a1168",
@@ -1616,7 +1667,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO PE_PE
 	VALUES ("24bf12a6-e448-410e-8544-b641010a1168",
 	1,
@@ -1647,7 +1699,8 @@ boolean
 	"ba5eda7a-def5-0000-0000-000000000001",
 	'return true;',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BRG
 	VALUES ("24411601-da0e-4d9c-9323-170dbb5edca7",
 	"06b8c1ef-8199-40d3-9cdc-da1733d2b876",
@@ -1657,7 +1710,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO PE_PE
 	VALUES ("06b8c1ef-8199-40d3-9cdc-da1733d2b876",
 	1,
@@ -1682,7 +1736,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("396cf66b-db27-45dd-86f4-d3cd17f1b10e",
 	"4599f020-0cb4-4206-ab72-486a30d4c1ec",
@@ -1701,7 +1756,8 @@ INSERT INTO S_BRG
 	"ba5eda7a-def5-0000-0000-000000000000",
 	'',
 	1,
-	'');
+	'',
+	0);
 INSERT INTO S_BPARM
 	VALUES ("8caaff32-9346-49ce-a56c-6782ec87d6f6",
 	"a041cb43-6ee2-468a-b287-d164bacaa347",
