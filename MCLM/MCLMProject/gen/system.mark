@@ -59,15 +59,12 @@
 .//   .invoke EnableTasking( "Windows", "", 3 )
 .//============================================================================
 .//
-.//.assign thread_type = "NxtOSEK"
-.assign thread_type = "EV3HRP"
-.invoke EnableTasking(thread_type,"",1)
-.if ( thread_type == "NxtOSEK" )
-.//NXT
-	.invoke SetTaskStackSize(0,512)
-.elif ( thread_type == "EV3HRP" )
-	.invoke SetTaskStackSize(0,4096)
-.end if
+.// NXT
+.//.invoke EnableTasking("NxtOSEK","",1)
+.//.invoke SetTaskStackSize(0,512)
+.// EV3
+.invoke EnableTasking("EV3HRP","",1)
+.invoke SetTaskStackSize(0,4096)
 .//
 .//============================================================================
 .// Establish Task Priority
@@ -87,13 +84,10 @@
 .//   .invoke SetTaskPriority( 3, "high" )
 .//============================================================================
 .//
-.if ( thread_type == "NxtOSEK" )
-.//NXT
-	.invoke SetTaskPriority( 0, "15" )
-.elif ( thread_type == "EV3HRP" )
+.// NXT
+.//.invoke SetTaskPriority( 0, "15" )
 .// EV3
-	.invoke SetTaskPriority( 0, "0" )
-.end if
+.invoke SetTaskPriority( 0, "0" )
 .//
 .//============================================================================
 .// TagMaximumStringLength( max_len )
