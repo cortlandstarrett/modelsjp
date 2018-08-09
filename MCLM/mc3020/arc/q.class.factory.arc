@@ -9,14 +9,6 @@
 .// (boolean gen_declaration) which is used to determine whether to generate
 .// the declaration or definition.  If gen_declaration is TRUE, the generated
 .// code is declaration, FALSE is definition.
-.//
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
 .//============================================================================
 .//
 .//============================================================================
@@ -73,23 +65,31 @@
   .param boolean  gen_declaration
   .//
   .select any te_dma from instances of TE_DMA
+  .select any te_prefix from instances of TE_PREFIX
   .select any te_string from instances of TE_STRING
   .select any te_instance from instances of TE_INSTANCE
   .select one te_sys related by te_class->TE_C[R2064]->TE_SYS[R2065]
   .if ( gen_declaration )
-${te_instance.handle} ${te_class.GeneratedName}_instanceloader( ${te_instance.handle}, const c_t * [] );
+${te_prefix.type}UniqueID_t ${te_class.GeneratedName}_instanceloader( ${te_instance.handle}, const c_t * [] );
   .else
 
 /*
  * Instance Loader (from string data).
  */
-${te_instance.handle}
+${te_prefix.type}UniqueID_t
 ${te_class.GeneratedName}_instanceloader( ${te_instance.handle} instance, const c_t * avlstring[] )
 {
-  ${te_instance.handle} return_identifier = 0;
+  ${te_prefix.type}UniqueID_t return_identifier = 0;
   ${te_class.GeneratedName} * ${te_instance.self} = (${te_class.GeneratedName} *) instance;
   /* Initialize application analysis class attributes.  */
-    .select any te_attr related by te_class->TE_ATTR[R2061] where ( selected.prevID == 00 )
+    .select any te_attr related by te_class->TE_ATTR[R2061]
+    .while ( not_empty te_attr )
+      .select one prev_te_attr related by te_attr->TE_ATTR[R2087.'succeeds']
+      .if ( empty prev_te_attr )
+        .break while
+      .end if
+      .assign te_attr = prev_te_attr
+    .end while
     .assign attribute_number = 1
     .while ( not_empty te_attr )
       .select one o_attr related by te_attr->O_ATTR[R2033]
@@ -128,7 +128,7 @@ ${te_class.GeneratedName}_instanceloader( ${te_instance.handle} instance, const 
           .assign attribute_number = attribute_number + 1
         .elif ( 5 == te_dt.Core_Typ )
           .// unique_id
-  ${te_instance.self}->${te_attr.GeneratedName} = (${te_instance.handle}) ${te_instance.module}${te_string.atoi}( avlstring[ ${attribute_number} ] );
+  ${te_instance.self}->${te_attr.GeneratedName} = ${te_instance.module}${te_string.uuidtou128}( avlstring[ ${attribute_number} ] );
           .select any o_oida related by o_attr->O_OIDA[R105] where ( selected.Oid_ID == 0 )
           .select one o_rattr related by o_attr->O_RATTR[R106]
           .if ( ( not_empty o_oida ) and ( empty o_rattr ) )
@@ -139,11 +139,11 @@ ${te_class.GeneratedName}_instanceloader( ${te_instance.handle} instance, const 
           .// current_state
         .elif ( 7 == te_dt.Core_Typ )
           .// same as base<Attribute>
-        .elif ( 8 == te_dt.Core_Typ )
+        .elif ( ( 8 == te_dt.Core_Typ ) or ( 20 == te_dt.Core_Typ ) )
           .// inst_ref<Object>
   ${te_instance.self}->${te_attr.GeneratedName} = ${te_instance.module}${te_string.atoi}( avlstring[ ${attribute_number} ] );
           .assign attribute_number = attribute_number + 1
-        .elif ( 9 == te_dt.Core_Typ )
+        .elif ( ( 9 == te_dt.Core_Typ ) or ( 21 == te_dt.Core_Typ ) )
           .// inst_ref_set<Object>
   ${te_instance.self}->${te_attr.GeneratedName} = ${te_instance.module}${te_string.atoi}( avlstring[ ${attribute_number} ] );
           .assign attribute_number = attribute_number + 1
@@ -165,7 +165,7 @@ ${te_class.GeneratedName}_instanceloader( ${te_instance.handle} instance, const 
       .end if
       .//
       .// Advance to the next object attribute, if any.
-      .select one te_attr related by te_attr->TE_ATTR[R2087.'succeeds']
+      .select one te_attr related by te_attr->TE_ATTR[R2087.'precedes']
     .end while
   return return_identifier;
 }
@@ -234,33 +234,31 @@ void ${te_class.GeneratedName}_batch_relate( ${te_instance.handle} instance )
           .select one part_te_class related by rto_obj->TE_CLASS[R2019]
           .select one te_where related by o_id->TE_WHERE[R2032]
           .select many o_rtidas related by r_rto->O_RTIDA[R110]
-          .assign o_rtida_count = cardinality o_rtidas
           .assign param_list = ""
           .assign delimeter = ""
-          .assign nonreferential = false
-          .select any te_attr related by part_te_class->TE_ATTR[R2061] where ( selected.prevID == 00 )
+          .select any te_attr related by part_te_class->TE_ATTR[R2061]
+          .while ( not_empty te_attr )
+            .select one prev_te_attr related by te_attr->TE_ATTR[R2087.'succeeds']
+            .if ( empty prev_te_attr )
+              .break while
+            .end if
+            .assign te_attr = prev_te_attr
+          .end while
           .while ( not_empty te_attr )
             .select one current_o_attr related by te_attr->O_ATTR[R2033]
             .for each o_rtida in o_rtidas
               .select one o_attr related by o_rtida->O_OIDA[R110]->O_ATTR[R105]
               .if ( o_attr == current_o_attr )
                 .select one o_rattr related by current_o_attr->O_RATTR[R106]
-                .if ( empty o_rattr )
-                  .assign nonreferential = true
-                .end if
                 .select any o_attr related by o_rtida->O_REF[R111]->O_RATTR[R108]->O_ATTR[R106] where ( selected.Obj_ID == r_rgo.Obj_ID )
                 .select one ref_te_attr related by o_attr->TE_ATTR[R2033]
                 .assign param_list = param_list + "${delimeter}${te_class.GeneratedName}_instance->${ref_te_attr.GeneratedName}"
                 .assign delimeter = ", "
               .end if
             .end for
-            .select one te_attr related by te_attr->TE_ATTR[R2087.'succeeds']
+            .select one te_attr related by te_attr->TE_ATTR[R2087.'precedes']
           .end while
-          .if ( ( ( 0 == o_id.Oid_ID ) and ( 1 == o_rtida_count ) ) and nonreferential )
-  ${part_te_class.GeneratedName} * ${part_te_class.GeneratedName}related_instance$t{r_rto_count} = (${part_te_class.GeneratedName} *) Escher_instance_cache[ (intptr_t) ${param_list} ];
-          .else
   ${part_te_class.GeneratedName} * ${part_te_class.GeneratedName}related_instance$t{r_rto_count} = ${te_where.select_any_where}( ${param_list} );
-          .end if
           .assign null_test = null_test + "${null_test_conjunction}${part_te_class.GeneratedName}related_instance$t{r_rto_count}"
           .assign null_test_conjunction = " && "
           .if ( r_rto_count < 2 )
@@ -279,7 +277,13 @@ void ${te_class.GeneratedName}_batch_relate( ${te_instance.handle} instance )
               .assign parameters = parameters + "${parameters_delimeter}${part_te_class.GeneratedName}related_instance$t{r_rto_count}"
             .else
               .assign rel_phrase = r_aone.Txt_Phrs
-              .assign parameters = "${part_te_class.GeneratedName}related_instance$t{r_rto_count}${parameters_delimeter}" + parameters
+              .select one r_aoth related by r_aone->R_ASSOC[R209]->R_AOTH[R210]
+              .if ( r_aone.Obj_ID != r_aoth.Obj_ID )
+                .assign parameters = "${part_te_class.GeneratedName}related_instance$t{r_rto_count}${parameters_delimeter}" + parameters
+              .else
+                .// for reflexive associatives, the parameter order always follows the role phrase
+                .assign parameters = parameters + "${parameters_delimeter}${part_te_class.GeneratedName}related_instance$t{r_rto_count}"
+              .end if
             .end if
           .end if
           .assign parameters_delimeter = ", "

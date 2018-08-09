@@ -1,14 +1,3 @@
-.//============================================================================
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
-.//============================================================================
-.//
-.//
 /*----------------------------------------------------------------------------
  *
  * Run time instrumentation and tracing declarations are defined here.
@@ -137,6 +126,8 @@ do { \
 #define ${te_prefix.define_usw}XTUML_EMPTY_HANDLE_TRACE( object_keyletters, s ) \
 do { ${te_callout.empty_handle_detected}( object_keyletters, s ); } while (0)
 #endif
+
+void * xtUML_detect_empty_handle( void *, const char *, const char * );
 
 /*
  * Declare state information structure.

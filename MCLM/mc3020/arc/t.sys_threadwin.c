@@ -1,14 +1,3 @@
-.//============================================================================
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
-.//============================================================================
-.//
-.//
 /*---------------------------------------------------------------------
  * File:  ${te_file.thread}.${te_file.src_file_ext}
  *
@@ -68,6 +57,7 @@ void ${te_thread.mutex_unlock}( const u1_t flavor )
  */
 void ${te_thread.nonbusy_wait}( const u1_t thread )
 {
+.if ( not te_sys.SimulatedTime )
   HANDLE dwc;
   ${te_thread.mutex_lock}( SEMAPHORE_FLAVOR_NONBUSY );
   dwc = nonbusy_wait_cond[thread];
@@ -84,6 +74,7 @@ void ${te_thread.nonbusy_wait}( const u1_t thread )
   } else {
     WaitForSingleObject( dwc, INFINITE );
   }
+.end if
 }
 
 /*

@@ -4,15 +4,6 @@
 .// Description:
 .// System level coloring functions are found here.
 .// Notice that the colors that would normally update TE_SYS are active.
-.//
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.// Enhancements provided by TOYO Corporation.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
 .//============================================================================
 .//
 .//
@@ -25,7 +16,6 @@
   .param integer number_of_threads
   .//
   .print "EnableTasking( ${flavor}, ${serialize}, $t{number_of_threads} )"
-  .print "Test"
   .select any tm_thread from instances of TM_THREAD
   .if ( empty tm_thread )
     .create object instance tm_thread of TM_THREAD
@@ -48,34 +38,45 @@
       .assign tm_thread.enabled = true
     .end if
 .//-- MCLM Extension start
-	.if ( ("NXTOSEK" == flavor) or ( "EV3HRP" == flavor) )
-		.create object instance ev3_body_ee of TM_PEEE
-		.assign ev3_body_ee.Key_Lett = "EV3B"
-		.assign ev3_body_ee.template = "t.EV3B_bridge.c"
-		.create object instance ev3_motor_ee of TM_PEEE
-		.assign ev3_motor_ee.Key_Lett = "EV3M"
-		.assign ev3_motor_ee.template = "t.EV3M_bridge.c"
-		.create object instance ev3_color_ee of TM_PEEE
-		.assign ev3_color_ee.Key_Lett = "EV3COL"
-		.assign ev3_color_ee.template = "t.EV3COL_bridge.c"
-		.create object instance ev3_gyro_ee of TM_PEEE
-		.assign ev3_gyro_ee.Key_Lett = "EV3GYR"
-		.assign ev3_gyro_ee.template = "t.EV3GYR_bridge.c"
-		.create object instance ev3_ultrasonic_ee of TM_PEEE
-		.assign ev3_ultrasonic_ee.Key_Lett = "EV3ULS"
-		.assign ev3_ultrasonic_ee.template = "t.EV3ULS_bridge.c"
-		.create object instance ev3_touch_ee of TM_PEEE
-		.assign ev3_touch_ee.Key_Lett = "EV3TCH"
-		.assign ev3_touch_ee.template = "t.EV3TCH_bridge.c"
-		.//.create object instance ev3_balancer_ee of TM_PEEE
-		.//.assign ev3_balancer_ee.Key_Lett = "EV3BAL"
-		.//.assign ev3_balancer_ee.template = "t.EV3_bridge.c"
-		.invoke MarkMainFunction("xtUMLMain")
-		.invoke r = GET_ENV_VAR( "ROX_MC_ARC_DIR" )
-		.assign arc_path = r.result
-		.include "${arc_path}/ev3.arc"
-	.end if
-.//-- MCLM Extension End		
+  .if ( ("NXTOSEK" == flavor) or ( "EV3HRP" == flavor) )
+    .create object instance ev3_body_ee of TM_PEEE
+    .assign ev3_body_ee.Key_Lett = "EV3B"
+    .assign ev3_body_ee.template = "t.EV3B_bridge.c"
+    .create object instance ev3_motor_ee of TM_PEEE
+    .assign ev3_motor_ee.Key_Lett = "EV3M"
+    .assign ev3_motor_ee.template = "t.EV3M_bridge.c"
+    .create object instance ev3_color_ee of TM_PEEE
+    .assign ev3_color_ee.Key_Lett = "EV3COL"
+    .assign ev3_color_ee.template = "t.EV3COL_bridge.c"
+    .create object instance ev3_gyro_ee of TM_PEEE
+    .assign ev3_gyro_ee.Key_Lett = "EV3GYR"
+    .assign ev3_gyro_ee.template = "t.EV3GYR_bridge.c"
+    .create object instance ev3_ultrasonic_ee of TM_PEEE
+    .assign ev3_ultrasonic_ee.Key_Lett = "EV3ULS"
+    .assign ev3_ultrasonic_ee.template = "t.EV3ULS_bridge.c"
+    .create object instance ev3_touch_ee of TM_PEEE
+    .assign ev3_touch_ee.Key_Lett = "EV3TCH"
+    .assign ev3_touch_ee.template = "t.EV3TCH_bridge.c"
+    .//.create object instance ev3_balancer_ee of TM_PEEE
+    .//.assign ev3_balancer_ee.Key_Lett = "EV3BAL"
+    .//.assign ev3_balancer_ee.template = "t.EV3_bridge.c"
+    .//.invoke TagDataTypePrecision( "*", "EV3Tone", "uint16_t", "" )
+    .//.invoke TagDataTypePrecision( "*", "EV3Button", "button_t", "" )
+    .//.invoke TagDataTypePrecision( "*", "EV3Color", "colorid_t", "" )
+    .//.invoke TagDataTypePrecision( "*", "EV3Font", "lcdfont_t", "" )
+    .//.invoke TagDataTypePrecision( "*", "EV3LcdColor", "lcdcolor_t", "" )
+    .//.invoke TagDataTypePrecision( "*", "EV3LedColor", "ledcolor_t", "" )
+    .print "----------EV3 ARC------------"
+    .invoke MarkMainFunction("xtUMLMain")
+    .invoke TagEnumeratorMap("*","EV3Button","","","button_t")
+    .invoke TagEnumeratorMap("*","EV3Color","COLOR_","","colorid_t")
+    .invoke TagEnumeratorMap("*","EV3Font","EV3_FONT_","ev3api.h","lcdfont_t")
+    .invoke TagEnumeratorMap("*","EV3LcdColor","EV3_LCD_","","lcdcolor_t")
+    .invoke TagEnumeratorMap("*","EV3LedColor","LED_","ev3api.h","ledcolor_t")
+    .invoke TagEnumeratorMap("*","EV3Motor","DEV_MOTOR_","mclm_ev3.h","device_motor_t")
+    .invoke TagEnumeratorMap("*","EV3Result","MCLM_RESULT_","mclm_ev3.h","mclm_result_t")
+  .end if
+.//-- MCLM Extension End
   .else
     .print "ERROR:  system.mark:EnableTasking has incorrect tasking/threading type:${flavor}.\n"
     .exit 100
@@ -108,12 +109,12 @@
 .function SetTaskStackSize
   .param integer task_number
   .param integer stack_size
-  .print "SetTaskStackSize( $t{task_number}, ${stack_size} )"
+  .print "SetTaskStackSize( $t{task_number}, $t{stack_size} )"
   .select any tm_thread from instances of TM_THREAD
   .if ( empty tm_thread )
     .create object instance tm_thread of TM_THREAD
   .end if
-  .select any tm_thread_element from instances of TM_THREAD_ELEMENT where selected.thread_no == task_number
+  .select any tm_thread_element from instances of TM_THREAD_ELEMENT where ( selected.thread_no == task_number )
   .if ( empty tm_thread_element )
     .create object instance tm_thread_element of TM_THREAD_ELEMENT
       .assign tm_thread_element.thread_no = task_number
@@ -263,6 +264,27 @@
   .assign tm_systag.NetworkSockets = true
 .end function
 .//
+.//============================================================================
+.// Use simulated time instead of wall clock time.
+.//============================================================================
+.function MarkSimulatedTime
+  .invoke r = TM_SYSTAG_select()
+  .assign tm_systag = r.result
+  .assign tm_systag.SimulatedTime = true
+  .print "MarkSimulatedTime:  Time marked to be simulated (rather than wall clock)."
+.end function
+.//
+.//============================================================================
+.// Set the state save buffer depth.
+.//============================================================================
+.function MarkStateSave
+  .param integer buffersize
+  .invoke r = TM_SYSTAG_select()
+  .assign tm_systag = r.result
+  .assign tm_systag.StateSaveBufferSize = buffersize
+  .print "MarkStateSave:  buffer size set to $t{buffersize}."
+.end function
+.//
 .function TM_SYSTAG_select .// tm_systag
   .select any tm_systag from instances of TM_SYSTAG
   .if ( empty tm_systag )
@@ -340,6 +362,9 @@
     .elif ( "TagSyncServiceSafeForInterrupts" == f )
       .// TagSyncServiceSafeForInterrupts("component_name","function_name")
       .invoke TagSyncServiceSafeForInterrupts(p1,p2)
+    .elif ( "MarkMessageSafeForInterrupts" == f )
+      .// MarkMessageSafeForInterrupts("component_name","port_name","message_name")
+      .invoke MarkMessageSafeForInterrupts(p1,p2,p3)
     .// datatype
     .elif ( "TagDataTypePrecision" == f )
       .// TagDataTypePrecision("component_name","dt_name","tagged_name","initial_value")
@@ -356,6 +381,9 @@
     .elif ( "AssignDirectToUDTPackage" == f )
       .// AssignDirectToUDTPackage("package_name")
       .invoke AssignDirectToUDTPackage(p1)
+    .elif ( "TagEnumeratorMap" == f )
+      .// TagEnumeratorMap("MyDom","MyEnum","ENUM_PREFIX","enum.h","datatype_t")
+      .invoke TagEnumeratorMap(p1,p2,p3,p4,p5)
     .// system
     .elif ( "EnableTasking" == f )
       .// EnableTasking("flavor","serialize","number_of_threads":integer)
@@ -432,6 +460,13 @@
       .invoke MarkStructuredMessaging()
     .elif ( "MarkNetworkSockets" == f )
       .invoke MarkNetworkSockets()
+    .elif ( "MarkSimulatedTime" == f )
+      .invoke MarkSimulatedTime()
+    .elif ( "MarkStateSave" == f )
+      .// MarkStateSave("buffersize":integer)
+      .invoke r = T_atoi( p1 )
+      .assign i1 = r.result
+      .invoke MarkStateSave(i1)
     .elif ( "MarkSystemConfigurationPackage" == f )
       .// MarkSystemConfigurationPackage("package_name")
       .invoke MarkSystemConfigurationPackage(p1)
@@ -440,6 +475,29 @@
       .invoke MarkSystemCPortType(p1)
     .elif ( "MarkAllPortsPolymorphic" == f )
       .invoke MarkAllPortsPolymorphic()
+    .elif ( "SetTaskStackSize" == f )
+      .// SetTaskStackSize("task_number":integer,"stack_size":integer)
+      .invoke r = T_atoi( p1 )
+      .assign i1 = r.result
+      .invoke r = T_atoi( p2 )
+      .assign i2 = r.result
+      .invoke SetTaskStackSize(i1,i2)
+    .elif ( "MarkMainFunction" == f )
+      .// MarkMainFunction("func_name")
+      .invoke MarkMainFunction(p1)
+    .elif ( "TagMotorConfig" == f )
+      .// TagMotorConfig("position","port","motor_type","invert":boolean)
+      .assign b4 = false
+      .if ( ("TRUE" == p4) or ("true" == p4) )
+        .assign b4 = true
+      .end if
+      .invoke TagMotorConfig(p1,p2,p3,b4)
+    .elif ( "TagSensorConfig" == f )
+      .// TagSensorConfig("sensor","port")
+      .invoke TagSensorConfig(p1,p2)
+    .elif ( "TagGyroSensorInvertOn" == f )
+      .// TagGyroSensorInvertOn()
+      .invoke TagGyroSensorInvertOn()
     .// component
     .elif ( "MarkAsChannel" == f )
       .// MarkAsChannel("package_name","component_name","inc_file")
@@ -503,18 +561,12 @@
     .elif ( "MarkClassOperationTranslationOff" == f )
       .// MarkClassOperationTranslationOff("component_name","obj_key_letters","op_name")
       .invoke MarkClassOperationTranslationOff(p1,p2,p3)
-    .elif ( "TagObjectTraceOff" == f )
-      .// TagObjectTraceOff("obj_key_letters")
-      .invoke TagObjectTraceOff(p1)
-    .elif ( "MarkObjectTraceOff" == f )
-      .// MarkObjectTraceOff("component_name","obj_key_letters")
-      .invoke MarkObjectTraceOff(p1,p2)
-    .elif ( "TagObjectTraceOn" == f )
-      .// TagObjectTraceOn("obj_key_letters")
-      .invoke TagObjectTraceOn(p1)
-    .elif ( "MarkObjectTraceOn" == f )
-      .// MarkObjectTraceOn("component_name","obj_key_letters")
-      .invoke MarkObjectTraceOn(p1,p2)
+    .elif ( "MarkClassTraceOff" == f )
+      .// MarkClassTraceOff("component_name","obj_key_letters")
+      .invoke MarkClassTraceOff(p1,p2)
+    .elif ( "MarkClassTraceOn" == f )
+      .// MarkClassTraceOn("component_name","obj_key_letters")
+      .invoke MarkClassTraceOn(p1,p2)
     .elif ( "TagPEIsDefinedInData" == f )
       .// TagPEIsDefinedInData("ss_prefix","obj_key_letters")
       .invoke TagPEIsDefinedInData(p1,p2)
@@ -646,6 +698,7 @@
   .param string s
   .invoke r = STRING_TO_INTEGER( s )
   .assign attr_result = r.result
+  .invoke oal( "return strtol( p_s, 0, 10 );" )
 .end function
 .// MCLM Extension start
 .//============================================================================
@@ -677,8 +730,8 @@
   .param boolean invert
   .//
   .if ( ((("LEFT" != position) and ("RIGHT" != position )) and (("TAIL" != position) and ("FRONT" != position))) and (( "USER1" != position ) and ("USER2" != position) ))
-  	.print "Motor Postion is not valid = " + ${position}
-  	.exit
+    .print "Motor Postion is not valid = ${position}"
+    .exit 1
   .end if
   .select any motor from instances of TM_LMDEV where ((selected.name == position) and ( "MOTOR" == selected.dev_type) )
   .if ( not_empty motor )
@@ -687,26 +740,26 @@
   .end if
   .if ( (("PORT_A" != port) and ("PORT_B" != port)) and (("PORT_C" != port) and ("PORT_D" != port)) )
     .print "PORT config is invalid"
-    .exit
+    .exit 1
   .end if
   .if ( (("L" != motor_type ) and ( "M" != motor_type )) and ( "U" != motor_type ) )
     .print "Motor type is invalid"
-    .exit
+    .exit 1
   .end if
   .create object instance motor of TM_LMDEV
   .if ( "L" == motor_type )
-  	.assign motor.dev_desc = "LARGE_MOTOR"
+    .assign motor.dev_desc = "LARGE_MOTOR"
   .elif ( "M" == motor_type )
-  	.assign motor.dev_desc = "MEDIUM_MOTOR"
+    .assign motor.dev_desc = "MEDIUM_MOTOR"
   .elif ( "U" == motor_type )
-  	.assign motor.dev_desc = "UNREGULATED_MOTOR"
+    .assign motor.dev_desc = "UNREGULATED_MOTOR"
   .end if
   .assign motor.dev_type = "MOTOR"
   .assign motor.name = position
 .//  .assign motor.dev_desc = motor_type
   .assign motor.port = port
   .assign motor.is_invert = invert
- .end function
+.end function
 .//============================================================================
 .// Tag Sensor Config
 .//
@@ -719,16 +772,16 @@
   .//
   .if ( (( "COLOR" != sensor ) and ( "GYRO" != sensor )) and (("ULTRASONIC" != sensor) and ("TOUCH" != sensor)) )
     .print "sensor is invalid"
-    .exit
+    .exit 1
   .end if
   .if ( (( "1" != port ) and ( "2" != port )) and (( "3" != port ) and ( "4" != port ) ) )
-  	.print "port ${port} is invalid"
-  	.exit 2
+    .print "port ${port} is invalid"
+    .exit 2
   .end if
   .select any sensor_inst from instances of TM_LMDEV where ( selected.dev_type == sensor )
   .if ( not_empty sensor_inst )
     .print "sensor ${sensor} is already tagged"
-    .exit
+    .exit 1
   .end if
   .create object instance sensor_inst of  TM_LMDEV
   .assign sensor_inst.dev_type = sensor
@@ -743,7 +796,7 @@
 .//
   .select any gyro from instances of TM_LMDEV where (selected.dev_type == "GYRO" )
   .if ( empty gyro )
-    .print "Gyro Sensor is not configured. set TagaSensorConfig("GYRO",xx) first
+    .print "Gyro Sensor is not configured. set TagaSensorConfig(""GYRO"",xx) first"
   .end if
   .assign gyro.is_invert = TRUE
 .end function

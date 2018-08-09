@@ -4,14 +4,6 @@
 .// Description:
 .// This archetype file contains the implementation functions for colors
 .// specified in the (user supplied/modified) domain.mark file.
-.//
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
 .//============================================================================
 .//
 .//
@@ -355,12 +347,7 @@
         .assign sibling_te_iir.port_name = port
         .assign sibling_te_iir.interface_name = te_po.InterfaceName
         .assign sibling_te_iir.polymorphic = false
-        .assign sibling_te_iir.cl_iirId = 00
-        .assign sibling_te_iir.c_irId = 00
-        .assign sibling_te_iir.te_poID = 00
-        .// relate sibling_te_iir to te_iir across R2081.'requires or delegates';
-        .assign sibling_te_iir.provider_te_iirID = te_iir.ID
-        .// end relate
+        .relate sibling_te_iir to te_iir across R2081.'requires or delegates'
       .end if
     .else
       .select one sibling_te_iir related by te_iir->TE_IIR[R2081.'requires or delegates']
@@ -370,12 +357,7 @@
         .assign sibling_te_iir.port_name = port
         .assign sibling_te_iir.interface_name = te_po.InterfaceName
         .assign sibling_te_iir.polymorphic = false
-        .assign sibling_te_iir.cl_iirId = 00
-        .assign sibling_te_iir.c_irId = 00
-        .assign sibling_te_iir.te_poID = 00
-        .// relate sibling_te_iir to te_iir across R2081.'requires or delegates';
-        .assign sibling_te_iir.provider_te_iirID = te_iir.ID
-        .// end relate
+        .relate sibling_te_iir to te_iir across R2081.'requires or delegates'
       .end if
     .end if
   .end for

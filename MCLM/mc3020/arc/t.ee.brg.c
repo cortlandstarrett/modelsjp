@@ -1,16 +1,5 @@
 .//============================================================================
-.// $RCSfile: t.ee.brg.c,v $
-.//
-.// Description:
 .// External Entity bridge body.
-.//
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
 .//============================================================================
 .//
 
@@ -77,6 +66,13 @@ ${te_aba.code}\
   result = ${te_prefix.result}NVS_version(${parameters.definition});
       .end if
     .end if
+    .if ( 0 < te_sys.StateSaveBufferSize )
+      .if ( ( "State Save" == te_ee.Name ) and ( "SS" == te_ee.Key_Lett ) and ( "access" == te_brg.Name ) )
+  #ifndef ${te_prefix.define_u}STATESAVE
+  result = (c_t *) ssbuf;
+  #endif
+      .end if
+    .end if
   /* Insert your implementation code here... */
   return result;
     .//
@@ -93,6 +89,13 @@ ${te_aba.code}\
   .end if
   /* Replace/Insert your implementation code here... */
 ${te_aba.code}\
+  .if ( 0 < te_sys.StateSaveBufferSize )
+    .if ( ( "State Save" == te_ee.Name ) and ( "SS" == te_ee.Key_Lett ) and ( "trigger" == te_brg.Name ) )
+  #ifndef ${te_prefix.define_u}STATESAVE
+  sstrigger();
+  #endif
+    .end if
+  .end if
 .end if
 }
 

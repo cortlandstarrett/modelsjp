@@ -1,13 +1,3 @@
-.//============================================================================
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
-.//============================================================================
-.//
 /*--------------------------------------------------------------------------
  * File:  ${te_file.factory}.${te_file.src_file_ext}
  *
@@ -21,9 +11,6 @@ ${all_domain_include_files}
 .end if
 
 .include "${te_file.arc_path}/t.sys_sets.c"
-.if ( te_sys.InstanceLoading )
-Escher_iHandle_t Escher_instance_cache[ 1000000 ];
-.end if
 
 .if ( "C" == te_target.language )
 ${system_class_array.class_info}
@@ -160,6 +147,12 @@ ${te_instance.scope}${te_instance.delete_persistent}(
   ${te_instance.scope}${te_instance.delete}( instance, ${domain_num_var}, class_num );
   Escher_PersistDelete( instance, domain_num, class_num );
 }
+.end if
+.if ( te_sys.MaxInterleavedBridges > 0 )
+  .invoke disable_interrupts = UserDisableInterrupts()
+  .invoke enable_interrupts = UserEnableInterrupts()
+
+  .include "${te_file.arc_path}/t.sys_ilb.c"
 .end if
 .if ( te_sys.InstanceLoading )
 

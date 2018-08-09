@@ -4,14 +4,6 @@
 .// Description:
 .// This archetype file contains the implementation functions for marks
 .// specified in the (user supplied/modified) datatype.clr file.
-.//
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
 .//============================================================================
 .//
 .//============================================================================
@@ -154,6 +146,7 @@
   .print "AssignDirectToUDTPackage is not a supported marking function."
   .exit 1
 .end function
+.//
 .//============================================================================
 .// TagEnumeratorMap
 .// .invoke TagEnumeratorMap("MyDom","MyEnum","ENUM_PREFIX","enum.h","datatype_t")
@@ -176,4 +169,4 @@
   .assign tm_lmenu.include_file = header_file
   .assign tm_lmenu.data_type = data_type
 .end function
-
+.//

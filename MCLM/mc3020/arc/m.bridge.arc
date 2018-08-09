@@ -4,14 +4,6 @@
 .// Description:
 .// This archetype file contains the implementation functions for colors
 .// specified in the (user supplied/modified) bridge.clr file.
-.//
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
 .//============================================================================
 .//
 .//============================================================================
@@ -60,5 +52,28 @@
   .end if
   .assign tm_sync.IsSafeForInterrupts = true
   .print "Function ${function_name} in component ${component_name} marked as safe for interrupt invocation."
+.end function
+.//
+.//
+.//============================================================================
+.// Mark a message as safe for interrupt service routine (ISR) invocation.
+.// This is also useful for task communication and multi-context execution.
+.//============================================================================
+.function MarkMessageSafeForInterrupts
+  .param string  component_name
+  .param string  port_name
+  .param string  message_name
+  .assign component_name = "$r{component_name}"
+  .assign port_name = "$r{port_name}"
+  .assign message_name = "$r{message_name}"
+  .select any tm_msg from instances of TM_MSG where ( ( selected.ComponentName == component_name ) and ( selected.PortName == port_name ) and ( selected.MessageName == message_name ) )
+  .if ( empty tm_msg )
+    .create object instance tm_msg of TM_MSG
+    .assign tm_msg.ComponentName = component_name
+    .assign tm_msg.PortName = port_name
+    .assign tm_msg.MessageName = message_name
+  .end if
+  .assign tm_msg.IsSafeForInterrupts = true
+  .print "Message ${message_name} in component ${component_name} on port ${port_name} marked as safe for interrupt invocation."
 .end function
 .//

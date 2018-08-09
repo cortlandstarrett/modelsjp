@@ -13,7 +13,7 @@
 #include "${te_file.xtumlload}.${te_file.hdr_file_ext}"
 ${all_domain_include_files}
 
-typedef ${te_instance.handle} (*LoadInstance_t)( ${te_instance.handle}, const c_t * [] );
+typedef ${te_prefix.type}UniqueID_t (*LoadInstance_t)( ${te_instance.handle}, const c_t * [] );
 
 typedef struct {
   const c_t * s;
@@ -46,20 +46,15 @@ static void Escher_load_instance(
 {
   Escher_ClassNumber_t n;
   ${te_instance.handle} instance;
-  ${te_instance.handle} return_identifier;
 
   /* Look up the class number and instance loader using the key letters.  */
   n = lookupclassloader( wordvalues[ 0 ] );
 
   /* Invoke the creation function using the class number.  */
-  instance = Escher_CreateInstance(
-    0, class_string_2_class_number[n].class_number );
+  instance = Escher_CreateInstance( 0, class_string_2_class_number[n].class_number );
 
   /* Convert/Populate the attribute values.  */
-  return_identifier = (*class_string_2_class_number[n].instance_loader)( instance, wordvalues );
-  if ( 0 != return_identifier ) {
-    Escher_instance_cache[ (intptr_t) return_identifier ] = instance;
-  }
+  (*class_string_2_class_number[n].instance_loader)( instance, wordvalues );
 }
 
 /*
@@ -114,6 +109,7 @@ static Escher_ClassNumber_t wordindex;
 */
 #define DEVELOPER_DEBUG( s, c )
 
+void ${te_prefix.result}batch_relate( const ${te_typemap.domain_number_name}, const ${te_typemap.object_number_name} );
 /*
  * Loop through reading the file one record at a time.
  * Parse each record.
@@ -126,15 +122,14 @@ int Escher_xtUML_load(
   Escher_ClassNumber_t i;
   bool done = false;
   if ( 2 != argc ) {
-    printf( "xtumlload <input xtUML file>\n" );
+    fprintf( stderr, "xtumlload <input xtUML file>\n" );
     return 1;
   }
   if ( (xtumlfile = fopen( argv[1], "r" )) == 0 ) {
-    printf( "%s failed to open %s\n", argv[0], argv[1] );
-    return 1;
+    /* no named file, so read from standard input */
+    xtumlfile = stdin;
   }
   init();               /* Initialize the xml storage area.      */
-  printf( "-- Read %s on the %s command line.\n", argv[1], argv[0] );
   /*
    * Read a record.  Parse it.  Pass it.  Repeat until end of file.
    */
@@ -145,11 +140,11 @@ int Escher_xtUML_load(
         Escher_load_instance( wordindex, word );
       }
     } else {
-      printf( "Error:  Did not parse.\n" );
+      fprintf( stderr, "Error:  Did not parse.\n" );
     }
   }
   for ( i = 0; i < ${all_max_class_numbers}; i++ ) {
-    Escher_batch_relate( 0, i );
+    ${te_prefix.result}batch_relate( 0, i );
   }
   return 0;
 }
@@ -170,7 +165,7 @@ static void init( void )
  */
 static bool readrecord( c_t ** r )
 {
-  #define MAXRECORDLENGTH 400000
+  #define MAXRECORDLENGTH 2000000
   static c_t record[ MAXRECORDLENGTH ] = {0};
   #define MAXLINELENGTH 1000
   static c_t line[ MAXLINELENGTH ] = {0};
@@ -309,7 +304,7 @@ static bool number( void )
   DEVELOPER_DEBUG( "number() %s\n", cursor );
   if ( ! ( ( ( '0' <= *cursor ) && ( *cursor <= '9' ) ) ||
            ( *cursor == '-' ) ) ) return false;
-  /* Capture unique_id into word.  */
+  /* Capture number into word.  */
   word[ wordindex++ ] = cursor++;
   while ( ( ( ( '0' <= *cursor ) && ( *cursor <= '9' ) ) ||
             ( *cursor == '-' ) ) &&

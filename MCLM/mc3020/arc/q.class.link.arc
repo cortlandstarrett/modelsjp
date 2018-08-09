@@ -4,14 +4,6 @@
 .// Description:
 .// This archetype file contains the functions for generating class
 .// association link methods and member data implementation code.
-.//
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
 .//============================================================================
 .//
 .//============================================================================
@@ -268,7 +260,7 @@ ${methods.body}\
   .end if
   .//
   .assign associative_reflexive = false
-  .if ( aone.Obj_Id == aoth.Obj_Id )
+  .if ( aone.Obj_ID == aoth.Obj_ID )
     .assign associative_reflexive = true
   .end if
   .//
@@ -840,6 +832,13 @@ ${aoth_fundamentals.body}\
     .select one ref_te_attr related by ref_o_attr->TE_ATTR[R2033]
     .if ( ref_te_attr.translate )
       .select one ident_te_attr related by o_attr->TE_ATTR[R2033]
+      .assign ident_accessor = ( ${part_ptr} + "->" ) + ${ident_te_attr.GeneratedName}
+      .select one o_dbattr related by o_attr->O_BATTR[R106]->O_DBATTR[R107]
+      .if ( not_empty o_dbattr )
+        .// derived attributes should be accessed via the accessor function
+        .select one te_dbattr related by o_dbattr->TE_DBATTR[R2026]
+        .assign ident_accessor = ( ${te_dbattr.GeneratedName} + "( " ) + ( ${part_ptr} + " )" )
+      .end if
       .invoke r = GetAttributeCodeGenType( ref_o_attr )
       .assign te_dt = r.result
       .include "${te_file.arc_path}/t.class.set_refs.c"
@@ -908,6 +907,7 @@ ${aoth_fundamentals.body}\
     .assign phrase = ".'${te_relinfo.rel_phrase}'"
   .end if
   .//
+  .if ( not_empty te_c )
   .if ( this_o_obj.Obj_ID != related_o_obj.Obj_ID )
     .// Non-reflexive - linkage based on navigation needs
     .if ( te_relinfo.is_formalizer )
@@ -934,6 +934,7 @@ ${aoth_fundamentals.body}\
   .else
     .// Reflexive - always need bi-directional linkage
     .assign storage_needed = true
+  .end if
   .end if
   .//
   .if ( te_relinfo.gen_declaration )
@@ -1029,19 +1030,21 @@ ${aoth_fundamentals.body}\
       .assign gen_navigate = true
     .end if
     .if ( gen_navigate )
-      .// Get the base names of the methods and data members to be generated.
-      .select any te_oir related by r_rel->R_OIR[R201]->TE_OIR[R2035] where ( selected.Obj_ID == related_o_obj.Obj_ID )
-      .invoke navigate_method  = GetNavigateLinkMethodName( this_o_obj, related_o_obj, r_rel, te_relinfo.rel_phrase )
-      .invoke member_data_name = GetRelationshipDataMemberName( related_o_obj, r_rel, te_relinfo.rel_phrase )
-      .//
-      .// Add the relationship navigation accessor method declaration as an inline
       .select one te_class related by this_o_obj->TE_CLASS[R2019]
       .select one related_te_class related by related_o_obj->TE_CLASS[R2019]
       .select one te_c related by te_class->TE_C[R2064]
-      .select one te_oir1 related by r_rto->R_OIR[R203]->TE_OIR[R2035]
-      .select one te_oir2 related by r_rgo->R_OIR[R203]->TE_OIR[R2035]
-      .assign navigated = ( te_oir1.NavigatedTo or te_oir2.NavigatedTo )
-      .include "${te_file.arc_path}/t.class.link.h"
+      .if ( ( ( not_empty te_class ) and ( not_empty related_te_class ) ) and ( not_empty te_c ) )
+        .// Get the base names of the methods and data members to be generated.
+        .select any te_oir related by r_rel->R_OIR[R201]->TE_OIR[R2035] where ( selected.Obj_ID == related_o_obj.Obj_ID )
+        .invoke navigate_method  = GetNavigateLinkMethodName( this_o_obj, related_o_obj, r_rel, te_relinfo.rel_phrase )
+        .invoke member_data_name = GetRelationshipDataMemberName( related_o_obj, r_rel, te_relinfo.rel_phrase )
+        .//
+        .// Add the relationship navigation accessor method declaration as an inline
+        .select one te_oir1 related by r_rto->R_OIR[R203]->TE_OIR[R2035]
+        .select one te_oir2 related by r_rgo->R_OIR[R203]->TE_OIR[R2035]
+        .assign navigated = ( te_oir1.NavigatedTo or te_oir2.NavigatedTo )
+        .include "${te_file.arc_path}/t.class.link.h"
+      .end if
     .end if
   .end if
 .end function
@@ -1057,12 +1060,12 @@ ${aoth_fundamentals.body}\
 .//============================================================================
 .function FiniRelStorageFragment
   .param inst_ref te_relstore
-  .// delete object instance te_relstore;
   .assign te_relstore.data_declare = ""
   .assign te_relstore.data_init    = ""
   .assign te_relstore.data_fini    = ""
   .assign te_relstore.link_calls   = ""
   .assign te_relstore.link_index   = 0
+  .delete object instance te_relstore
 .end function
 .//
 .//============================================================================

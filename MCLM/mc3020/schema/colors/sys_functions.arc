@@ -5,10 +5,6 @@
 .// This archetype file contains system level user definable archetype
 .// functions.
 .//
-.// Notice:
-.// (C) Copyright 1999-2010 Mentor Graphics Corporation
-.//     All rights reserved.
-.// Enhancements provided by TOYO Corporation.
 .//============================================================================
 .//
 .//
