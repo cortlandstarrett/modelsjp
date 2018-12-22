@@ -1,14 +1,3 @@
-.//============================================================================
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
-.//============================================================================
-.//
-.//
 /*
  * Data structures and methods associated with the event base class of this
  * model compiler.
@@ -218,6 +207,9 @@ void ${te_eq.non_self}( ${te_eq.base_event_type} * );
 void ${te_eq.self}( ${te_eq.base_event_type} * );
 .if ( te_tim.timer_event_search_and_destroy )
 bool ${te_eq.search_and_destroy}( ${te_eq.base_event_type} * );
+.end if
+.if ( ( 0 < te_sys.StateSaveBufferSize ) or ( te_sys.PersistentClassCount > 0 ) )
+${te_typemap.instance_index_name} ${te_prefix.result}getindex( const ${te_instance.handle}, const ${te_typemap.domain_number_name}, const ${te_typemap.object_number_name} );
 .end if
 .if ( te_sys.AUTOSAR )
 void * ooa_loop( void * );

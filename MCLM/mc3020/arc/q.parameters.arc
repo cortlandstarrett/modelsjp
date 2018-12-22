@@ -1,17 +1,6 @@
 .//============================================================================
-.// $RCSfile: q.parameters.arc,v $
-.//
-.// Description:
 .// Here we deal with parameters.  The declaration, definition and invocation
 .// renderings are built.
-.//
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
 .//============================================================================
 .//
 .//
@@ -39,7 +28,7 @@
     .break for
   .end for
   .while ( not_empty te_parm )
-    .select one prev_te_parm related by te_parm->TE_PARM[R2041.'precedes']
+    .select one prev_te_parm related by te_parm->TE_PARM[R2041.'succeeds']
     .if ( empty prev_te_parm )
       .break while
     .else
@@ -86,7 +75,7 @@
     .end if
     .assign param_delimiter = ", "
     .assign format_delimiter = ","
-    .select one te_parm related by te_parm->TE_PARM[R2041.'succeeds']
+    .select one te_parm related by te_parm->TE_PARM[R2041.'precedes']
   .end while
   .if ( "" != defn )
     .assign defn = defn + " "

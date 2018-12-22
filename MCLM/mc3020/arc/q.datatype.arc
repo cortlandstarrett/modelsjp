@@ -1,17 +1,4 @@
 .//============================================================================
-.// $RCSfile: q.datatype.arc,v $
-.//
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
-.//============================================================================
-.//
-.//
-.//============================================================================
 .// Recursively locate the datatype at the base of the UDT type definition 
 .// chain. Traverses up through UDTs based on UDTs until we find the underlying
 .// S_DT instance (which may actually be EDT, SDT, IRDT or CDT).
@@ -35,6 +22,7 @@
   .param inst_ref o_attr
   .//
   .select one s_dt related by o_attr->S_DT[R114]
+  .select one parent_te_dt related by s_dt->TE_DT[R2021]
   .select one s_udt related by s_dt->S_UDT[R17]
   .if ( not_empty s_udt )
     .invoke r = GetBaseTypeForUDT( s_udt )
@@ -75,6 +63,12 @@
       .// Note: the following is a recursive call to this function
       .invoke r = GetAttributeCodeGenType( base_o_attr )
       .assign te_dt = r.result
+    .end if
+    .if ( 11 == s_cdt.Core_Typ )
+      .// inst<Mapping>
+      .// Come up one level from bottoming out CDT, because the
+      .// code gen information is in the parent for Mappings.
+      .assign te_dt = parent_te_dt
     .end if
   .end if
   .assign attr_result = te_dt

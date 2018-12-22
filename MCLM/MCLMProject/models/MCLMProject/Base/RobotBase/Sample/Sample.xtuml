@@ -32,7 +32,7 @@ INSERT INTO GD_GE
 	"5d97448f-9436-4f71-9847-53c6c18a530e",
 	21,
 	0,
-	'MCLMProject::Base::RobotBase::Sample::Sensor Test');
+	'MCLMProject::Base::RobotBase::Sample::Sample Robot');
 INSERT INTO GD_SHP
 	VALUES ("db537c09-6f19-4325-b2a8-5b9f4fae0149");
 INSERT INTO GD_NCS

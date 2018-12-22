@@ -5,14 +5,6 @@
 .// This archetype file provides general purpose functions used during 
 .// action language translation. They are not specific to any particular
 .// fragment generator entry points.
-.//
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
 .//============================================================================
 .//
 .//============================================================================
@@ -26,12 +18,13 @@
   .invoke oal( "T_clear();" )
   .select any te_file from instances of TE_FILE
   .select any te_instance from instances of TE_INSTANCE
+  .select any te_prefix from instances of TE_PREFIX
   .select any te_string from instances of TE_STRING
   .select any te_sys from instances of TE_SYS
   .// Be sure we have the first attribute in the class.
   .select any first_te_attr related by te_class->TE_ATTR[R2061]
   .while ( not_empty first_te_attr )
-    .select one prev_te_attr related by first_te_attr->TE_ATTR[R2087.'precedes']
+    .select one prev_te_attr related by first_te_attr->TE_ATTR[R2087.'succeeds']
     .if ( empty prev_te_attr )
       .break while
     .end if
@@ -56,7 +49,7 @@
     .end if
     .//
     .// Advance to the next object attribute, if any.
-    .select one te_attr related by te_attr->TE_ATTR[R2087.'succeeds']
+    .select one te_attr related by te_attr->TE_ATTR[R2087.'precedes']
   .end while
 .end function
 .//
@@ -76,7 +69,7 @@
     .// Be sure we have the first attribute in the class.
     .select any first_te_attr related by te_class->TE_ATTR[R2061]
     .while ( not_empty first_te_attr )
-      .select one prev_te_attr related by first_te_attr->TE_ATTR[R2087.'precedes']
+      .select one prev_te_attr related by first_te_attr->TE_ATTR[R2087.'succeeds']
       .if ( empty prev_te_attr )
         .break while
       .end if
@@ -92,7 +85,7 @@
       .end if
       .assign compare_stmt = compare_stmt + cmp_element
       .// Advance to the next object attribute, if any.
-      .select one te_attr related by te_attr->TE_ATTR[R2087.'succeeds']
+      .select one te_attr related by te_attr->TE_ATTR[R2087.'precedes']
       .if ( not_empty te_attr )
         .assign compare_stmt = compare_stmt + " && "
       .end if
@@ -115,7 +108,7 @@
   .// Be sure we have the first attribute in the class.
   .select any first_te_attr related by te_class->TE_ATTR[R2061]
   .while ( not_empty first_te_attr )
-    .select one prev_te_attr related by first_te_attr->TE_ATTR[R2087.'precedes']
+    .select one prev_te_attr related by first_te_attr->TE_ATTR[R2087.'succeeds']
     .if ( empty prev_te_attr )
       .break while
     .end if
@@ -130,7 +123,7 @@
         .assign param_list = param_list + ", "
       .end if
     .end if
-    .select one te_attr related by te_attr->TE_ATTR[R2087.'succeeds']
+    .select one te_attr related by te_attr->TE_ATTR[R2087.'precedes']
   .end while
   .//
   .assign attr_result = param_list

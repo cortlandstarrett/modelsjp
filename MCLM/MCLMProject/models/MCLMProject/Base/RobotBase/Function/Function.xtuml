@@ -49,7 +49,8 @@ INSERT INTO S_SYNC
 ',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'');
+	'',
+	0);
 INSERT INTO PE_PE
 	VALUES ("3c6f1a09-052c-44df-acf1-de3973a94b2b",
 	1,

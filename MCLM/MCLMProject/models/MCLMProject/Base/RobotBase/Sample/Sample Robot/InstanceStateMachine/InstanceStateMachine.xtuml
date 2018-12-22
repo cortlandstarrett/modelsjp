@@ -144,7 +144,8 @@ end while;
 // generate event to self
 generate SR2:tick to self;
 ',
-	'');
+	'',
+	0);
 INSERT INTO SM_TAH
 	VALUES ("266a950f-d08a-43f4-bf58-466bf6893143",
 	"eed0171e-e271-4f10-a6e5-60b8dbd4ed0f",
@@ -157,7 +158,8 @@ INSERT INTO SM_ACT
 	"eed0171e-e271-4f10-a6e5-60b8dbd4ed0f",
 	1,
 	'',
-	'');
+	'',
+	0);
 INSERT INTO SM_MOAH
 	VALUES ("228fbc27-a2ab-4d65-babd-d01c794c4893",
 	"eed0171e-e271-4f10-a6e5-60b8dbd4ed0f",
@@ -181,7 +183,8 @@ end if;
 create event instance aTick of SR2:tick to self;
 timer_handle = TIM::timer_start(event_inst : aTick, microseconds : 4000 ); /* loop 4msec */
 	',
-	'');
+	'',
+	0);
 INSERT INTO SM_TAH
 	VALUES ("d38b2002-2ebb-4035-a9b6-0ee4763833c4",
 	"eed0171e-e271-4f10-a6e5-60b8dbd4ed0f",
@@ -194,7 +197,8 @@ INSERT INTO SM_ACT
 	"eed0171e-e271-4f10-a6e5-60b8dbd4ed0f",
 	3,
 	'',
-	'');
+	'',
+	0);
 INSERT INTO SM_TAH
 	VALUES ("d8f3c83f-c1ad-4af6-9656-2a917db14642",
 	"eed0171e-e271-4f10-a6e5-60b8dbd4ed0f",
@@ -207,7 +211,8 @@ INSERT INTO SM_ACT
 	"eed0171e-e271-4f10-a6e5-60b8dbd4ed0f",
 	3,
 	'',
-	'');
+	'',
+	0);
 INSERT INTO GD_MD
 	VALUES ("c26b6cb5-8a70-449a-9ec1-ee2670abf620",
 	8,

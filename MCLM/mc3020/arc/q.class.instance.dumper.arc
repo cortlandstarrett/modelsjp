@@ -2,14 +2,6 @@
 .// Description:
 .// This query/transformation archetype file generates an instance dumper
 .// in RSL format.
-.//
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
 .//============================================================================
 .//
 .//
@@ -60,7 +52,7 @@ ${delimiter} ${dollarcurly}$l{o_obj.Key_Lett}.${attributename}}\
                   .end if
                   .assign delimiter = ","
                 .end if
-                .select one o_attr related by o_attr->O_ATTR[R103.'succeeds']
+                .select one o_attr related by o_attr->O_ATTR[R103.'precedes']
               .end while
  );
 ..end for

@@ -1,17 +1,6 @@
 .//============================================================================
-.// File:  $RCSfile: q.class.sm_sm.arc,v $
-.//
-.// Description:
 .// This query populates a template containing file for the states of a Finite
 .// State Machine (FSM) implementation of xtUML state models.
-.//
-.// Notice:
-.// (C) Copyright 1998-2013 Mentor Graphics Corporation
-.//     All rights reserved.
-.//
-.// This document contains confidential and proprietary information and
-.// property of Mentor Graphics Corp.  No part of this document may be
-.// reproduced without the express written permission of Mentor Graphics Corp.
 .//============================================================================
 .//
 .//
@@ -21,7 +10,6 @@
 .select many instance_sm_states related by sm_sm->SM_STATE[R501]
 .for each sm_state in instance_sm_states
   .select one te_state related by sm_state->TE_STATE[R2037]
-  .select any sm_crtxn related by sm_state->SM_TXN[R506]->SM_CRTXN[R507] where ( selected.SMspd_ID == sm_state.SMspd_ID )
   .select one sm_act related by sm_state->SM_MOAH[R511]->SM_AH[R513]->SM_ACT[R514]
   .select one te_act related by sm_act->TE_ACT[R2022]
   .if ( not_empty te_act )
@@ -33,7 +21,6 @@
     .include "${te_file.arc_path}/t.class.sm_act.c"
   .end if
 .end for
-.select any sm_crtxn from instances of SM_CRTXN where ( false )
 .select any te_state from instances of TE_STATE where ( false )
 .//
 .select many instance_sm_txns related by sm_sm->SM_TXN[R505]
